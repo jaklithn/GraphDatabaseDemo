@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neo.Movies", "Neo.Movies\Ne
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{024F1F4F-60A3-4662-B885-235269D1A2D2}"
 	ProjectSection(SolutionItems) = preProject
-		Readme.md = Readme.md
+		..\Readme.md = ..\Readme.md
 	EndProjectSection
 EndProject
 Global

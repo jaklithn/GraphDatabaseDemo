@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Neo4j.Driver.V1;
 using Utility.Extensions;
 
@@ -22,12 +23,41 @@ namespace Neo.Movies.Business.Extensions
                 {
                     var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
                     var nodeValue = node[key];
-                    var value = nodeValue == null ? null : Convert.ChangeType(nodeValue, propertyType);
+                    var value = ParseValue<T>(nodeValue, propertyType);
                     property.SetValue(obj, value);
                 }
             }
 
             return obj;
+        }
+
+        private static object ParseValue<T>(object nodeValue, Type propertyType)
+        {
+            if (nodeValue == null)
+            {
+                return null;
+            }
+            if (propertyType.IsArray)
+            {
+                if (nodeValue is string strNodeValue)
+                {
+                    var arr = strNodeValue.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    switch (propertyType.Name)
+                    {
+                        case "String[]":
+                            return arr;
+                        // TODO: Handle other types if necessary ...
+                        default:
+                            if (arr.Length > 0)
+                            {
+                                var itemType = arr.GetValue(0).GetType();
+                                return arr.Cast<object>().Select((t, i) => Convert.ChangeType(arr.GetValue(i), itemType)).ToList();
+                            }
+                            break;
+                    }
+                }
+            }
+            return Convert.ChangeType(nodeValue, propertyType);
         }
     }
 }

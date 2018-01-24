@@ -41,7 +41,7 @@ namespace Neo.Movies.Business.Services
         /// <param name="returnKey">The key name used in the statement to return values</param>
         /// <param name="parameters">Optional parameter values to be injected in statement</param>
         /// <returns></returns>
-        public List<INode> GetNodes(string statement, string returnKey, IDictionary<string, object> parameters)
+        public IReadOnlyList<INode> GetNodes(string statement, string returnKey, IDictionary<string, object> parameters = null)
         {
             using (var session = _driver.Session())
             {
@@ -51,17 +51,52 @@ namespace Neo.Movies.Business.Services
         }
 
         /// <summary>
+        /// Retrieve anonymous type records by specifying Cypher query with appropriate parameters.
+        /// </summary>
+        /// <param name="statement">Cypher Match statement</param>
+        /// <param name="parameters">Optional parameter values to be injected in statement</param>
+        /// <returns>Set of property key/value pairs</returns>
+        public IReadOnlyList<Dictionary<string, object>> GetNodes(string statement, IDictionary<string, object> parameters = null)
+        {
+            using (var session = _driver.Session())
+            {
+                var records = new List<Dictionary<string, object>>();
+                var result = session.Run(statement, parameters);
+                foreach (var record in result)
+                {
+                    var properties = record.Keys.ToDictionary(key => key, key => record.Values[key]);
+                    records.Add(properties);
+                }
+                return records;
+            }
+        }
+
+        /// <summary>
         /// Example of how to retrieve objects from graph database.
         /// This variant will load all records af a specific type.
         /// </summary>
         /// <typeparam name="T">Expected type</typeparam>
         /// <param name="nodeLabel">Type label used in database if not default type name</param>
-        public List<T> GetAllObjects<T>(string nodeLabel = null)
+        public IReadOnlyList<T> GetAllObjects<T>(string nodeLabel = null)
         {
             nodeLabel = nodeLabel ?? typeof(T).Name;
             var statement = $"MATCH (n:{nodeLabel}) RETURN n";
             const string returnKey = "n";
             return GetNodes(statement, returnKey, null).Select(n => n.AsObject<T>()).ToList();
+        }
+
+        /// <summary>
+        /// Execute custom pass through query
+        /// </summary>
+        /// <param name="statement">Cypher Match statement</param>
+        /// <param name="parameters">Optional parameter values to be injected in statement</param>
+        public IResultSummary Execute(string statement, IDictionary<string, object> parameters = null)
+        {
+            using (var session = _driver.Session())
+            {
+                var result = session.Run(statement, parameters);
+                return result.Summary;
+            }
         }
 
         /// <summary>
@@ -104,12 +139,16 @@ namespace Neo.Movies.Business.Services
             }
         }
 
+
         /// <summary>
         /// By encapsulating many statements in an explicit transaction, the total execution time is greatly improved!
         /// In a typical example it was measured to be ~14 times faster.
         /// </summary>
-        public void AddNodes(IEnumerable<object> objects, string label = null)
+        /// <param name="objects">Objects of any type</param>
+        /// <param name="label">Custom label to be used. If omitted object type is used.</param>
+        public int AddNodes(IEnumerable<object> objects, string label = null)
         {
+            var addedCount = 0;
             using (var session = _driver.Session())
             {
                 var transaction = session.BeginTransaction();
@@ -117,7 +156,7 @@ namespace Neo.Movies.Business.Services
                 foreach (var obj in objects)
                 {
                     i += 1;
-                    transaction.AddNode(obj, label, i);
+                    addedCount += transaction.AddNode(obj, label, i);
 
                     if (i % BatchSizeInsert == 0)
                     {
@@ -130,10 +169,22 @@ namespace Neo.Movies.Business.Services
                 transaction.Success();
                 transaction.Dispose();
             }
+            return addedCount;
         }
 
-        public void AddRelations<T>(IEnumerable<T> relations, MappingConfig mappingConfig)
+        /// <summary>
+        /// Add single object as node.
+        /// </summary>
+        /// <param name="obj">Object of any type</param>
+        /// <param name="label">Custom label to be used. If omitted object type is used.</param>
+        public int AddNode(object obj, string label = null)
         {
+            return AddNodes(new[] { obj }, label);
+        }
+
+        public int AddRelations<T>(IEnumerable<T> relations, MappingConfig mappingConfig)
+        {
+            var addedCount = 0;
             using (var session = _driver.Session())
             {
                 var transaction = session.BeginTransaction();
@@ -141,7 +192,7 @@ namespace Neo.Movies.Business.Services
                 foreach (var relation in relations)
                 {
                     i += 1;
-                    transaction.AddRelation(relation, mappingConfig, i);
+                    addedCount += transaction.AddRelation(relation, mappingConfig, i);
 
                     if (i % BatchSizeInsert == 0)
                     {
@@ -154,6 +205,7 @@ namespace Neo.Movies.Business.Services
                 transaction.Success();
                 transaction.Dispose();
             }
+            return addedCount;
         }
 
         public void AddIndex(string typeName, string propertyName)

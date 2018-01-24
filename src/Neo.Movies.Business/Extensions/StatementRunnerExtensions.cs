@@ -18,7 +18,7 @@ namespace Neo.Movies.Business.Extensions
         /// <param name="obj">Generic POCO object</param>
         /// <param name="label">Specify type name to be used. Skip if you are satisfied with object type name.</param>
         /// <param name="i">Optional counter if used from collection. Only used for logging.</param>
-        public static void AddNode(this IStatementRunner statementRunner, object obj, string label, int? i = null)
+        public static int AddNode(this IStatementRunner statementRunner, object obj, string label, int? i = null)
         {
             // CREATE (:TypeName { propertyName1: propertyValue, propertyName2: propertyValue2 } )";
             label = label ?? obj.GetType().Name;
@@ -28,8 +28,9 @@ namespace Neo.Movies.Business.Extensions
             var result = statementRunner.Run(statement, parameters);
 
             var node = (INode)result.Single().As<IRecord>()["x"];
-            var nodeCounter = i.HasValue ? $"({i})" : string.Empty;
+            var nodeCounter = i.HasValue && i.Value > 1 ? $"({i})" : string.Empty;
             Console.WriteLine($"{string.Join(",", node.Labels)} node created with Id={node.Id} and {node.Properties.Count} properties {nodeCounter}");
+            return result.Summary.Counters.NodesCreated;
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Neo.Movies.Business.Extensions
         /// <param name="relation">Object used as relation specifier</param>
         /// <param name="mappingConfig">Description on how to interpret record object</param>
         /// <param name="i">Optional counter if used from collection. Only used for logging.</param>
-        public static void AddRelation<T>(this IStatementRunner statementRunner, T relation, MappingConfig mappingConfig, int? i = null)
+        public static int AddRelation<T>(this IStatementRunner statementRunner, T relation, MappingConfig mappingConfig, int? i = null)
         {
             // MATCH (f:FromNodeType), (t:ToNodeType)
             // WHERE f.FromPropertyName = 'FromPropertyValue' AND t.ToPropertyName = 'ToPropertyValue'
@@ -60,6 +61,7 @@ namespace Neo.Movies.Business.Extensions
             var relationship = (IRelationship)result.Single().As<IRecord>()["r"];
             var relationCounter = i.HasValue ? $"({i})" : string.Empty;
             Console.WriteLine($"{relationship.Type} relation created with Id={relationship.Id} and {relationship.Properties.Count} properties {relationCounter}");
+            return result.Summary.Counters.RelationshipsCreated;
         }
 
         /// <summary>
