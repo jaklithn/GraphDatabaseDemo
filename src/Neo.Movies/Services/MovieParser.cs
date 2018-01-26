@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
@@ -22,7 +23,6 @@ namespace Neo.Movies.Services
             var dt = new DebugTimer(true);
 
             var movieContainer = ParseFromFile();
-            movieContainer.RemoveInconsistencies();
 
             var repository = new NeoDriverRepository();
             //var repository = new NeoClientRepository();
@@ -53,11 +53,14 @@ namespace Neo.Movies.Services
             dt.Write($"Added {movieContainer.WriterRelations.Count} Writer relations");
             repository.AddRelations(movieContainer.ProducerRelations, producerMapping);
             dt.Write($"Added {movieContainer.ProducerRelations.Count} Producer relations");
-
+            double itemCount = movieContainer.Movies.Count + movieContainer.Persons.Count + 
+                               movieContainer.ActorRelations.Count + movieContainer.DirectorRelations.Count +
+                               movieContainer.ProducerRelations.Count + movieContainer.WriterRelations.Count;
             dt.WriteTotal();
             
             Console.WriteLine();
             Console.WriteLine("Successfully finished!");
+            Console.WriteLine($"{itemCount} items added in {dt.TotalTime/1000:D0} s ({dt.TotalTime/itemCount:N1} ms each)");
             Console.WriteLine();
             Console.WriteLine("Detailed summary with processing times can be found in Debug Output window.");
 

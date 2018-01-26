@@ -14,9 +14,7 @@ namespace Neo.Movies.Business.Entities
         public string Plot { get; set; }
         public string Tagline { get; set; }
         public string OriginalLanguage { get; set; }
-        public double TmdbPopularity { get; set; }
-        public double TmdbVoteAverage { get; set; }
-        public int TmdbVoteCount { get; set; }
+        public double Rating { get; set; }
         public int Budget { get; set; }
     }
 }

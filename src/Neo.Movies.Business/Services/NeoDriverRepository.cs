@@ -34,6 +34,15 @@ namespace Neo.Movies.Business.Services
             _driver?.Dispose();
         }
 
+        public Movie GetMovie(string imdbId)
+        {
+            using (var session = _driver.Session())
+            {
+                var result = session.Run("MATCH (n:Movie) WHERE n.imdbId={id} RETURN n", new { id = imdbId } );
+                return result.GetObject<Movie>("n");
+            }
+        }
+
         /// <summary>
         /// Retrieve generic INode records by specifying Cypher query with appropriate parameters.
         /// </summary>

@@ -58,6 +58,7 @@
     <Compile Include="Entities\Movie.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Relations.cs" />
+    <Compile Include="Extensions\StatementRunner.cs" />
     <Compile Include="Extensions\StatementRunnerExtensions.cs" />
     <Compile Include="Extensions\NodeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

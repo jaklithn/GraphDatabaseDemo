@@ -11,7 +11,7 @@
         public string FromId { get; set; }
         public string ToId { get; set; }
         public int Order { get; set; }
-        public string Character { get; set; }
+        public string Role { get; set; }
     }
 
     public class Directed : IRelation

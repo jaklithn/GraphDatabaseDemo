@@ -54,6 +54,10 @@ namespace Neo.Movies
                     var nodeCount = repository.AddNode(movie);
                     Console.WriteLine($"{nodeCount} Movie node created");
                     Console.WriteLine();
+
+                    // Retrieve one single movie
+                    var movie1 = repository.GetMovie("tt0240772");
+                    Console.WriteLine($"Movie '{movie1.Title}' retrieved");
                 }
             }
 

@@ -35,13 +35,13 @@ namespace Neo.Movies.Business.Services
             _client?.Dispose();
         }
 
-        public void Test()
+        public Movie GetMovie(string imdbId)
         {
             var query = _client.Cypher
                 .Match("(m:Movie)")
-                .Where((Movie m) => m.ImdbId == "tt0109830")
+                .Where((Movie m) => m.ImdbId == imdbId)
                 .Return<Movie>("m");
-            var movies = query.Results;
+            return query.Results.FirstOrDefault();
         }
 
         /// <summary>
