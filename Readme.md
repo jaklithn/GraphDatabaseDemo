@@ -11,7 +11,8 @@ That will install the **"Neo4j Server Enterprise Edition for Developers"** and t
 
 
 ## Setup
-Follow the instructions to download and install Neo4j.
+_(Disclaimer: These instructions were made for Server version 3.3.2 and Desktop version 1.0.11. Future versions might very well change the setup steps.)_  
+Follow the instructions to download and install Neo4j.  
 When prompted for a user you can choose whatever authentication method you prefer. Please note that this is only the user of the Desktop Panel and has nothing to do with the database user.
 If everything works well you will now have a Neo4j Desktop window.
 
