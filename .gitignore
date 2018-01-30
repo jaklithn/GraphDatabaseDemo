@@ -2,7 +2,7 @@
 # Custom ignores added at top
 #########################################################
 
-# **/Cosmos.Movies/App.config
+**/Movies.Cosmos/App.config
 
 
 

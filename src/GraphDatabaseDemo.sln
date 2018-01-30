@@ -3,22 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Neo.Utility\Utility.csproj", "{32B52F86-96D6-40E8-999D-6A281EFAC1E2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neo.Movies.Business", "Neo.Movies.Business\Neo.Movies.Business.csproj", "{AAE81319-05A9-49B2-A089-A467DAD91CE6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neo.Movies", "Neo.Movies\Neo.Movies.csproj", "{6A265EA5-7625-4B2A-8B7E-6E3659D9DED4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{024F1F4F-60A3-4662-B885-235269D1A2D2}"
 	ProjectSection(SolutionItems) = preProject
 		..\Readme.md = ..\Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Movies", "Cosmos.Movies\Cosmos.Movies.csproj", "{57EFED71-745B-4FFE-9062-8C51A634610F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Movies.Business", "Cosmos.Movies.Business\Cosmos.Movies.Business.csproj", "{B5B18B15-EDF1-4694-ACD1-197A0E668504}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies", "Movies\Movies.csproj", "{C24F620F-E8B7-4A6C-B4A7-28067314136F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{32B52F86-96D6-40E8-999D-6A281EFAC1E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Genealogy", "Genealogy\Genealogy.csproj", "{234D43B0-D4C0-48AC-BBDC-8D8EEAFE1FBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Genealogy.Neo", "Genealogy.Neo\Genealogy.Neo.csproj", "{649110A7-A396-4C24-A13E-2D7AF090BB7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Neo", "Movies.Neo\Movies.Neo.csproj", "{6A265EA5-7625-4B2A-8B7E-6E3659D9DED4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Cosmos", "Movies.Cosmos\Movies.Cosmos.csproj", "{57EFED71-745B-4FFE-9062-8C51A634610F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neo", "Neo\Neo.csproj", "{E1E17AC6-5183-4AAD-AB3F-8E9CCBBC7793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,14 +28,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{32B52F86-96D6-40E8-999D-6A281EFAC1E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32B52F86-96D6-40E8-999D-6A281EFAC1E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32B52F86-96D6-40E8-999D-6A281EFAC1E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32B52F86-96D6-40E8-999D-6A281EFAC1E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAE81319-05A9-49B2-A089-A467DAD91CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAE81319-05A9-49B2-A089-A467DAD91CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAE81319-05A9-49B2-A089-A467DAD91CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAE81319-05A9-49B2-A089-A467DAD91CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{234D43B0-D4C0-48AC-BBDC-8D8EEAFE1FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234D43B0-D4C0-48AC-BBDC-8D8EEAFE1FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234D43B0-D4C0-48AC-BBDC-8D8EEAFE1FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234D43B0-D4C0-48AC-BBDC-8D8EEAFE1FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{649110A7-A396-4C24-A13E-2D7AF090BB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649110A7-A396-4C24-A13E-2D7AF090BB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649110A7-A396-4C24-A13E-2D7AF090BB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649110A7-A396-4C24-A13E-2D7AF090BB7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A265EA5-7625-4B2A-8B7E-6E3659D9DED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A265EA5-7625-4B2A-8B7E-6E3659D9DED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A265EA5-7625-4B2A-8B7E-6E3659D9DED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,14 +52,10 @@ Global
 		{57EFED71-745B-4FFE-9062-8C51A634610F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57EFED71-745B-4FFE-9062-8C51A634610F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57EFED71-745B-4FFE-9062-8C51A634610F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5B18B15-EDF1-4694-ACD1-197A0E668504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5B18B15-EDF1-4694-ACD1-197A0E668504}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5B18B15-EDF1-4694-ACD1-197A0E668504}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5B18B15-EDF1-4694-ACD1-197A0E668504}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C24F620F-E8B7-4A6C-B4A7-28067314136F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E17AC6-5183-4AAD-AB3F-8E9CCBBC7793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E17AC6-5183-4AAD-AB3F-8E9CCBBC7793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E17AC6-5183-4AAD-AB3F-8E9CCBBC7793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E17AC6-5183-4AAD-AB3F-8E9CCBBC7793}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

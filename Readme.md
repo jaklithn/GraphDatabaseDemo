@@ -42,7 +42,7 @@ If you later would like to change the password it is done with a command:
 
 
 ## Load Movies
-By running the Neo.Movies console application you will install Movies from the zip file located in Resources folder.
+By running the Movies.Neo console application you will install Movies from the zip file located in Resources folder.
 This will give you 8000 movies, 60000 persons and 150000 relations to play with. The generation will typically take ~15 minutes. You might feel this is slow but it is actually quite fast. An average record operation takes ~0.4ms which is about ten times faster than most RDBMS. There are several techniques to bulk process imports making it much faster, but that is outside the scope of this demo.
 
 
@@ -89,30 +89,41 @@ https://neo4j.com/docs/developer-manual/current/get-started/cypher/
 
 ### Movies
 This project is responsible for defining the movie structures as POCO objects.
-MovieContainer is used to deserialize the json content found in Movies/Resources/MovieContainer.zip and import it into Neo4j database.
+MovieParser is used to deserialize the json content found in Resources/MovieContainer.zip into a MovieContainer.
 
-### Neo.Movies.Program
+### Genealogy
+Basic structure for genealogy data originally created from standardized GEDCOM files.  
+PersonParser loads data from Resources/PersonContainer.zip
+
+### Neo
+Base classes to work with Neo4j database.
+
+- NeoDriverRepository  
+This class uses the official C# Neo4j.Driver to manipulate Neo4j data.  
+Tip: Some of the provided generic methods might be helpful to reuse in other projects as they perform some typical tasks like adding generic nodes, relations and indexes.
+This repository mainly uses plain Cypher queries.
+
+- NeoClientRepository  
+I made this repository just as a comparison. It implements almost the same methods using another driver called Neo4jClient which is created by the community.
+The ambition of that driver is to abstract Cypher language by using more ".Net style methods" with lambda syntax. When starting off I really liked this ambition. But the downside is that it ends up being almost more complicated to use. Some issues I never managed to do with this client. This client is also a bit behind the official one. So after careful consideration I decided I personally prefer the official Neo4j.Driver.
+
+### Movies.Neo
 When you run this console application you get a question on data generation. On first run you should hit Y to accept a generation of data. As mentioned this will take some time, so please be patient. On subsequent runs you can hit any other key which will step you through some provided demo calls. They will show you how to do some common tasks from code:
 - Retrieve typed objects
 - Retrieve custom data from custom query
 - Add node
 - Delete node
 
-### Neo.Movies.Business.NeoDriverRepository
-This uses the official C# Neo4j.Driver to manipulate Neo4j data.
-Tip: Some of the provided generic methods might be helpful to reuse in other projects as they perform some typical tasks like adding generic nodes, relations and indexes.
-This repository mainly uses plain Cypher queries.
 
-### Neo.Movies.Business.NeoClientRepository
-I made this repository just as a comparison. It implements almost the same methods using another driver called Neo4jClient which is created by the community.
-The ambition of that driver is to abstract Cypher language by using more ".Net style methods" with lambda syntax. When starting off I really liked this ambition. But the downside is that it ends up being almost more complicated to use. Some issues I never managed to do with this client. This client is also a bit behind the official one (like no implementation of Bolt protocol and no intention to add it). So after careful consideration I decided I personally prefer the official Neo4j.Driver.
-
-## Cosmos projects
-I also added a quick attempt to use CosmosDB just for comparison. When you are familiar with the graph concept you will probably be able to grasp the approach. My preliminary impression is that a lot of things works the same. In CosmosDB nodes are called Vertex and relations are called Edges.  
+### Movies.Cosmos
+This console application is similar to Movies.Neo. It is added as a quick attempt to use CosmosDB to perform the same tasks. When you are familiar with the graph concept you will probably be able to grasp the approach. My preliminary impression is that a lot of things works the same. In CosmosDB nodes are called Vertex and relations are called Edges.  
 To start with CosmosDB you need to have an Azure account and create a CosmosDB database.  
 I suggest you follow instructions from here: https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-dotnet  
-When you have CosmosDB you need to add your endPoint and authenticationKey to the app.config file of Cosmos.Movies.
+When you have a working CosmosDB database you need to add your endPoint and authenticationKey to the app.config file in Movies.Cosmos.
 
 **Disclaimer:  
 The Cosmos Movie example is currently NOT working! Frankly I got a bit frustrated when things didn't work as I expected. It is a bit confusing when CosmosDB is created by Microsoft and Gremlin language is governed by an external part. The documentation was not enough to solve my issues.**
 
+### Genealogy.Neo
+Load genealogy data into Neo4j database.  
+Please ensure that you have the intended database started in your Neo4j Desktop Client before you import! If you previously imported Movie data with the other console application you might still have that database active, which will cause all movie data to disappear.

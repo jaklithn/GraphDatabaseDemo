@@ -1,11 +1,8 @@
-﻿namespace Movies.Entities
-{
-    public interface IRelation
-    {
-        string FromId { get; }
-        string ToId { get; }
-    }
+﻿using Utility.Entities;
 
+
+namespace Movies.Entities
+{
     public class ActedIn : IRelation
     {
         public string FromId { get; set; }
