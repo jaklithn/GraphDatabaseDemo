@@ -105,4 +105,4 @@ This repository mainly uses plain Cypher queries.
 
 ### NeoClientRepository
 I made this repository just as a comparison. It implements almost the same methods using another driver called Neo4jClient which is created by the community.
-The ambition of that driver is to abstract Cypher language by using more ".Net style methods" with lambda syntax. When starting off I really liked this ambition. But the downside is that it ends up being almost more complicated to use. This client is also a bit behind the official one (like no implementation of Bolt protocol and no intention to add it). So after careful consideration I decided I actually prefer the official Neo4j.Driver.
+The ambition of that driver is to abstract Cypher language by using more ".Net style methods" with lambda syntax. When starting off I really liked this ambition. But the downside is that it ends up being almost more complicated to use. Some issues I never managed to do with this client. This client is also a bit behind the official one (like no implementation of Bolt protocol and no intention to add it). So after careful consideration I decided I personally prefer the official Neo4j.Driver.
