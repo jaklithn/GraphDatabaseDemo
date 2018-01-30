@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Neo.Movies.Business.Entities;
+using Movies.Entities;
 using Utility.Extensions;
 using Neo4jClient;
 using Newtonsoft.Json.Serialization;

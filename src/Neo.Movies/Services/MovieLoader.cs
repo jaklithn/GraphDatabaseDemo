@@ -1,28 +1,19 @@
 ﻿using System;
-using System.Data;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
-using Neo.Movies.Business.Entities;
+using Movies.Entities;
+using Movies.Services;
 using Neo.Movies.Business.Services;
-using Neo.Movies.Entities;
-using Newtonsoft.Json;
 using Utility.Services;
 
 namespace Neo.Movies.Services
 {
-    public static class MovieParser
+    public static class MovieLoader
     {
-        private const string ZipFileName = "MovieContainer.zip";
-        private const string JsonFileName = "MovieContainer.json";
-
-
         public static void LoadMovies()
         {
             Console.WriteLine();
             var dt = new DebugTimer(true);
 
-            var movieContainer = ParseFromFile();
+            var movieContainer = MovieParser.ParseFromFile();
 
             var repository = new NeoDriverRepository();
             //var repository = new NeoClientRepository();
@@ -65,29 +56,6 @@ namespace Neo.Movies.Services
             Console.WriteLine("Detailed summary with processing times can be found in Debug Output window.");
 
             Console.ReadKey();
-        }
-
-        private static MovieContainer ParseFromFile()
-        {
-            var baseDir = Directory.GetParent(Environment.CurrentDirectory).Parent?.FullName ?? string.Empty;
-            var zipFilePath = Path.Combine(baseDir, "Resources", ZipFileName);
-            using (var zipStorer = ZipStorer.Open(zipFilePath, FileAccess.Read))
-            {
-                var zipDir = zipStorer.ReadCentralDir();
-                foreach (var zipEntry in zipDir)
-                {
-                    if (Path.GetFileName(zipEntry.FilenameInZip) == JsonFileName)
-                    {
-                        using (var ms = new MemoryStream())
-                        {
-                            zipStorer.ExtractFile(zipEntry, ms);
-                            var json = Encoding.UTF8.GetString(ms.ToArray());
-                            return JsonConvert.DeserializeObject<MovieContainer>(json);
-                        }
-                    }
-                }
-                return null;
-            }
         }
     }
 }

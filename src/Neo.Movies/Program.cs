@@ -1,5 +1,5 @@
 ﻿using System;
-using Neo.Movies.Business.Entities;
+using Movies.Entities;
 using Neo.Movies.Business.Services;
 using Neo.Movies.Services;
 
@@ -14,7 +14,7 @@ namespace Neo.Movies
             var feedbackKey = Console.ReadKey();
             if (feedbackKey.Key == ConsoleKey.Y)
             {
-                MovieParser.LoadMovies();
+                MovieLoader.LoadMovies();
             }
             else
             {

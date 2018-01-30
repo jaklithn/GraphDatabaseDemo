@@ -10,7 +10,7 @@ For demo usage the easiest way is probably to click the default Download button 
 That will install the **"Neo4j Server Enterprise Edition for Developers"** and the **"Neo4j Desktop"** which is a convenient tool to interact with your databases.
 
 
-## Setup
+## Neo4j Setup
 _(Disclaimer: These instructions were made for Server version 3.3.2 and Desktop version 1.0.11. Future versions might very well change the setup steps.)_  
 Follow the instructions to download and install Neo4j.  
 When prompted for a user you can choose whatever authentication method you prefer. Please note that this is only the user of the Desktop Panel and has nothing to do with the database user.
@@ -87,6 +87,10 @@ https://neo4j.com/docs/developer-manual/current/get-started/cypher/
 
 ## Code
 
+### Movies
+This project is responsible for defining the movie structures as POCO objects.
+MovieContainer is used to deserialize the json content found in Movies/Resources/MovieContainer.zip and import it into Neo4j database.
+
 ### Neo.Movies.Program
 When you run this console application you get a question on data generation. On first run you should hit Y to accept a generation of data. As mentioned this will take some time, so please be patient. On subsequent runs you can hit any other key which will step you through some provided demo calls. They will show you how to do some common tasks from code:
 - Retrieve typed objects
@@ -94,15 +98,21 @@ When you run this console application you get a question on data generation. On 
 - Add node
 - Delete node
 
-### Neo.Movies.Entities
-This is just a simple representation of the movie structures as POCO objects.
-MovieContainer is used to deserialize the json content found in Neo.Movies/Resources/MovieContainer.zip and import it into Neo4j database.
-
-### NeoDriverRepository
+### Neo.Movies.Business.NeoDriverRepository
 This uses the official C# Neo4j.Driver to manipulate Neo4j data.
 Tip: Some of the provided generic methods might be helpful to reuse in other projects as they perform some typical tasks like adding generic nodes, relations and indexes.
 This repository mainly uses plain Cypher queries.
 
-### NeoClientRepository
+### Neo.Movies.Business.NeoClientRepository
 I made this repository just as a comparison. It implements almost the same methods using another driver called Neo4jClient which is created by the community.
 The ambition of that driver is to abstract Cypher language by using more ".Net style methods" with lambda syntax. When starting off I really liked this ambition. But the downside is that it ends up being almost more complicated to use. Some issues I never managed to do with this client. This client is also a bit behind the official one (like no implementation of Bolt protocol and no intention to add it). So after careful consideration I decided I personally prefer the official Neo4j.Driver.
+
+## Cosmos projects
+I also added a quick attempt to use CosmosDB just for comparison. When you are familiar with the graph concept you will probably be able to grasp the approach. My preliminary impression is that a lot of things works the same. In CosmosDB nodes are called Vertex and relations are called Edges.  
+To start with CosmosDB you need to have an Azure account and create a CosmosDB database.  
+I suggest you follow instructions from here: https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-dotnet  
+When you have CosmosDB you need to add your endPoint and authenticationKey to the app.config file of Cosmos.Movies.
+
+**Disclaimer:  
+The Cosmos Movie example is currently NOT working! Frankly I got a bit frustrated when things didn't work as I expected. It is a bit confusing when CosmosDB is created by Microsoft and Gremlin language is governed by an external part. The documentation was not enough to solve my issues.**
+

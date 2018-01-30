@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Neo.Movies.Business.Entities;
+using Movies.Entities;
 using Neo.Movies.Business.Extensions;
 using Neo4j.Driver.V1;
 

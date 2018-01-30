@@ -1,6 +1,7 @@
 ﻿using Utility.Extensions;
 
-namespace Neo.Movies.Business.Entities
+
+namespace Movies.Entities
 {
     /// <summary>
     /// Specification on how the incoming relation is to be interpreted and mapped to existing nodes.

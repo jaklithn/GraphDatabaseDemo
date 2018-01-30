@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace Neo.Movies.Business.Entities
+
+namespace Movies.Entities
 {
     public class Movie
     {

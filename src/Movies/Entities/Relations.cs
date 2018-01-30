@@ -1,4 +1,4 @@
-﻿namespace Neo.Movies.Business.Entities
+﻿namespace Movies.Entities
 {
     public interface IRelation
     {

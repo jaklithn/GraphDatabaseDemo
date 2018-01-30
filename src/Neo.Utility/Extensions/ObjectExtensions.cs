@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utility.Extensions;
 
-namespace Neo.Movies.Business.Extensions
+
+namespace Utility.Extensions
 {
     public static class ObjectExtensions
     {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Neo.Movies.Business.Entities;
 
 
-namespace Neo.Movies.Entities
+namespace Movies.Entities
 {
     public class MovieContainer
     {

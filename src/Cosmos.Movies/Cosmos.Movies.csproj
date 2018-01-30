@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AAE81319-05A9-49B2-A089-A467DAD91CE6}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Neo.Movies.Business</RootNamespace>
-    <AssemblyName>Neo.Movies.Business</AssemblyName>
+    <ProjectGuid>{57EFED71-745B-4FFE-9062-8C51A634610F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Cosmos.Movies</RootNamespace>
+    <AssemblyName>Cosmos.Movies</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,20 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Neo4j.Driver, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neo4j.Driver.1.5.0\lib\net452\Neo4j.Driver.dll</HintPath>
-    </Reference>
-    <Reference Include="Neo4jClient, Version=2.0.0.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neo4jClient.2.0.0.10\lib\net45\Neo4jClient.dll</HintPath>
-    </Reference>
-    <Reference Include="Neo4jClient.Extension.Attributes, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neo4jClient.Extension.Attributes.1.0.1\lib\net45\Neo4jClient.Extension.Attributes.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,26 +42,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\StatementRunner.cs" />
-    <Compile Include="Extensions\StatementRunnerExtensions.cs" />
-    <Compile Include="Extensions\NodeExtensions.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\NeoClientRepository.cs" />
-    <Compile Include="Services\NeoDriverRepository.cs" />
+    <Compile Include="Services\MovieLoader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Cosmos.Movies.Business\Cosmos.Movies.Business.csproj">
+      <Project>{b5b18b15-edf1-4694-acd1-197a0e668504}</Project>
+      <Name>Cosmos.Movies.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Movies\Movies.csproj">
-      <Project>{c24f620f-e8b7-4a6c-b4a7-28067314136f}</Project>
+      <Project>{C24F620F-E8B7-4A6C-B4A7-28067314136F}</Project>
       <Name>Movies</Name>
     </ProjectReference>
     <ProjectReference Include="..\Neo.Utility\Utility.csproj">
-      <Project>{32b52f86-96d6-40e8-999d-6a281efac1e2}</Project>
+      <Project>{32B52F86-96D6-40E8-999D-6A281EFAC1E2}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

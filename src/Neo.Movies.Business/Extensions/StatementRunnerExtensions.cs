@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Neo.Movies.Business.Entities;
+using Movies.Entities;
 using Neo4j.Driver.V1;
 using Utility.Extensions;
 
