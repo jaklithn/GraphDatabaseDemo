@@ -16,7 +16,7 @@ namespace Neo.Services
     /// It is built on the Bolt protocol which ensures maximal speed and security.
     /// After evaluation this is the driver I recommend for most users.
     /// </summary>
-    public class NeoDriverRepository : IDisposable
+    public abstract class NeoDriverRepository : IDisposable
     {
         private const int BatchSizeDelete = 10000;
         private const int BatchSizeInsert = 100;

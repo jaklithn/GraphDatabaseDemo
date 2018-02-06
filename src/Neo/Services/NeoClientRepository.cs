@@ -15,19 +15,19 @@ namespace Neo.Services
     /// It looks nice, but you really need to know your Cypher syntax anyhow, so in the end it will not be a big advantage.
     /// Another disadvantage is that it usually is a bit behind the Neo development.
     /// </summary>
-    public class NeoClientRepository : IDisposable
+public abstract class NeoClientRepository : IDisposable
+{
+    protected readonly GraphClient Client;
+
+    protected NeoClientRepository()
     {
-        protected readonly GraphClient Client;
+        var url = ConfigurationManager.AppSettings["urlHttp"];
+        var user = ConfigurationManager.AppSettings["user"];
+        var password = ConfigurationManager.AppSettings["password"];
 
-        protected NeoClientRepository()
-        {
-            var url = ConfigurationManager.AppSettings["urlHttp"];
-            var user = ConfigurationManager.AppSettings["user"];
-            var password = ConfigurationManager.AppSettings["password"];
-
-            Client = new GraphClient(new Uri(url), user, password) { JsonContractResolver = new CamelCasePropertyNamesContractResolver() };
-            Client.Connect();
-        }
+        Client = new GraphClient(new Uri(url), user, password) { JsonContractResolver = new CamelCasePropertyNamesContractResolver() };
+        Client.Connect();
+    }
 
         public void Dispose()
         {

@@ -21,5 +21,9 @@ namespace Movies.Entities
             WriterRelations = new List<Wrote>();
             ProducerRelations = new List<Produced>();
         }
+
+        public int NodeCount => Movies.Count + Persons.Count;
+        public int RelationCount => ActorRelations.Count + DirectorRelations.Count + WriterRelations.Count + ProducerRelations.Count;
+        public int ItemCount => NodeCount + RelationCount;
     }
 }

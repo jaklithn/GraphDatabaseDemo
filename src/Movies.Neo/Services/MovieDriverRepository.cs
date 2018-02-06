@@ -11,7 +11,7 @@ namespace Movies.Neo.Services
         {
             using (var session = Driver.Session())
             {
-                var result = session.Run("MATCH (n:Movie) WHERE n.imdbId={id} RETURN n", new {id = imdbId});
+                var result = session.Run("MATCH (n:Movie) WHERE n.imdbId={id} RETURN n", new { id = imdbId });
                 return result.GetObject<Movie>("n");
             }
         }

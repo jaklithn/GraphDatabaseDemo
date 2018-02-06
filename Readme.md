@@ -86,14 +86,12 @@ https://neo4j.com/docs/developer-manual/current/get-started/cypher/
 
 
 ## Code
+The demo mainly uses these 3 projects: Movies, Neo and Movies.Neo.  
+The other projects are more experimental (Movies.Cosmos tries to add the Movie domain to Microsoft Azure CosmosDB graph server, Genealogy is an attempt to import an alternative data domain into Neo4j).
 
 ### Movies
 This project is responsible for defining the movie structures as POCO objects.
 MovieParser is used to deserialize the json content found in Resources/MovieContainer.zip into a MovieContainer.
-
-### Genealogy
-Basic structure for genealogy data originally created from standardized GEDCOM files.  
-PersonParser loads data from Resources/PersonContainer.zip
 
 ### Neo
 Base classes to work with Neo4j database.
@@ -124,6 +122,17 @@ When you have a working CosmosDB database you need to add your endPoint and auth
 **Disclaimer:  
 The Cosmos Movie example is currently NOT working! Frankly I got a bit frustrated when things didn't work as I expected. It is a bit confusing when CosmosDB is created by Microsoft and Gremlin language is governed by an external part. The documentation was not enough to solve my issues.**
 
+### Genealogy
+Basic structure for genealogy data originally created from standardized GEDCOM files.  
+PersonParser loads data from Resources/PersonContainer.zip
+
 ### Genealogy.Neo
 Load genealogy data into Neo4j database.  
 Please ensure that you have the intended database started in your Neo4j Desktop Client before you import! If you previously imported Movie data with the other console application you might still have that database active, which will cause all movie data to disappear.
+
+
+## Contact
+If you want to contact me for further discussions you can find me here:
+LinkedIn: https://www.linkedin.com/in/jakoblithner/
+StackOverflow: https://stackoverflow.com/users/1122813/jakob-lithner
+Email: jakob.lithner@squeed.com
