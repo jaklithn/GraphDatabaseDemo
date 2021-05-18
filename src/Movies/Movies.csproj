@@ -54,6 +54,7 @@
     <Compile Include="Services\MovieParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\MovieContainer.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
